@@ -1,0 +1,13 @@
+{
+    "update": "2023-02-18 - Mark",
+    "files": [
+        {
+            "name": "readme.md",
+            "dir": "/home/pi"
+        },
+        {
+            "name": "readme1.md",
+            "dir": "/home/pi"
+        }
+    ]
+}

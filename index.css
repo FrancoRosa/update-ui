@@ -1,0 +1,66 @@
+* {
+  font-family: monospace;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(40, 40, 40);
+  color: limegreen;
+  height: 70vh;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#container {
+  border: 1px solid limegreen;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+button {
+  border: 1px solid limegreen;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: limegreen;
+  background-color: transparent;
+}
+
+button:disabled {
+  border: 1px solid darkgreen;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: darkgreen;
+  background-color: transparent;
+  cursor: default;
+}
+
+.loader {
+  border: 3px solid darkgreen;
+  /* Light grey */
+  border-top: 3px solid lime;
+  /* Blue */
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  animation: spin 1s linear infinite;
+  margin-top: 2em;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
