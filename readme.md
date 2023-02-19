@@ -13,6 +13,7 @@ Create a folder containing files and a `info.json` file. The json file should co
 ```json
 {
   "update": "2023-02-18 - Mark",
+  "commands": [],
   "files": [
     { "name": "readme.md", "dir": "/home/pi" },
     { "name": "readme1.md", "dir": "/home/pi" }

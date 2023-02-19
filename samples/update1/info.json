@@ -1,13 +1,14 @@
 {
     "update": "2023-02-18 - Mark",
+    "commands": [],
     "files": [
         {
             "name": "readme.md",
-            "dir": "/home/pi"
+            "dir": "/home/fx"
         },
         {
             "name": "readme1.md",
-            "dir": "/home/pi"
+            "dir": "/home/fx"
         }
     ]
 }
