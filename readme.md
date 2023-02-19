@@ -8,7 +8,7 @@ To run this application `nodejs` must be installed, then the main script `index.
 
 ## How to use it
 
-Create a folder containing files and a `info.json` file. The json file should contain the update version name, the files needed and the appropriate directions where to save them. Example:
+Create a folder containing files and a `info.json` file. The json file should contain the update version name, additional commands (Ex: create a new folder),the files needed and the appropriate directions where to save them. Example:
 
 ```json
 {
