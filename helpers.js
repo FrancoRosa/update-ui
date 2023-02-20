@@ -1,4 +1,5 @@
 const { execSync, exec } = require("child_process");
+const { create } = require("domain");
 const fs = require("fs");
 
 const createPath = (path) => {
@@ -40,22 +41,21 @@ const patchFiles = (dir) => {
   let path = dir.replace(".zip", "");
   let instructions = readFile(`${path}/info.json`);
   instructions = JSON.parse(instructions);
-  console.log("Commands");
-  instructions.commands.forEach((e) => {
-    execSync(e, (err, stout, sterr) => {
-      console.log({ e });
-      console.log({ err });
-      console.log({ stout });
-      console.log({ sterr });
-    });
-  });
-  console.log("Files");
-  instructions.files.forEach((e) => {
-    execSync(`cp -f ${path}/${e.name} ${e.dir}`, (err, stout, sterr) => {
-      console.log({ e });
-      console.log({ err });
-      console.log({ stout });
-      console.log({ sterr });
+  createLog("Update: " + instructions.update);
+  instructions.instructions.forEach((ins) => {
+    let response = "";
+    if (ins.type === "file") {
+      response = execSync(`cp -vf ${path}/${ins.name} ${ins.dir}`);
+    }
+    if (ins.type === "command") {
+      createLog("Command: " + ins.name);
+
+      response = execSync(ins.name);
+    }
+    response = response.toString().split("\n");
+    console.log(response);
+    response.forEach((line) => {
+      if (line.length > 0) createLog(line);
     });
   });
 };

@@ -72,7 +72,6 @@ logsButton.addEventListener("click", () => {
       return res.json();
     })
     .then((json) => {
-      console.log(json);
       logs.innerText = json.response;
     })
     .catch((e) => {
