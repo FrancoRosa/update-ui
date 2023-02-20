@@ -1,9 +1,12 @@
-const { execSync } = require("child_process");
+const { execSync, exec } = require("child_process");
 const fs = require("fs");
-const ps = require("process");
 
 const createPath = (path) => {
   fs.existsSync(path) || fs.mkdirSync(path);
+};
+
+const getTimestamp = () => {
+  return new Date().toLocaleString("se-SV");
 };
 
 const readFile = (path) => {
@@ -17,15 +20,43 @@ const readFile = (path) => {
   return text;
 };
 
+const createLog = (message) => {
+  fs.appendFileSync(
+    `${__dirname}/logs.txt`,
+    `${getTimestamp()} - ${message}\n`
+  );
+};
+
+const removeLogs = () => {
+  fs.writeFileSync(`${__dirname}/logs.txt`, "");
+};
+
+const reboot = () => {
+  createLog("User reboot");
+  execSync("sudo reboot");
+};
+
 const patchFiles = (dir) => {
   let path = dir.replace(".zip", "");
   let instructions = readFile(`${path}/info.json`);
   instructions = JSON.parse(instructions);
+  console.log("Commands");
   instructions.commands.forEach((e) => {
-    execSync(e);
+    execSync(e, (err, stout, sterr) => {
+      console.log({ e });
+      console.log({ err });
+      console.log({ stout });
+      console.log({ sterr });
+    });
   });
+  console.log("Files");
   instructions.files.forEach((e) => {
-    execSync(`cp -f ${path}/${e.name} ${e.dir}`);
+    execSync(`cp -f ${path}/${e.name} ${e.dir}`, (err, stout, sterr) => {
+      console.log({ e });
+      console.log({ err });
+      console.log({ stout });
+      console.log({ sterr });
+    });
   });
 };
 
@@ -35,3 +66,6 @@ exports.password = password;
 exports.createPath = createPath;
 exports.patchFiles = patchFiles;
 exports.readFile = readFile;
+exports.createLog = createLog;
+exports.removeLogs = removeLogs;
+exports.reboot = reboot;

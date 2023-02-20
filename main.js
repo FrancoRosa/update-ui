@@ -4,7 +4,14 @@ const http = require("http");
 const cors = require("cors");
 const path = require("path");
 const fileUpload = require("express-fileupload");
-const { password, patchFiles, readFile } = require("./helpers.js");
+const {
+  password,
+  patchFiles,
+  readFile,
+  createLog,
+  reboot,
+  removeLogs,
+} = require("./helpers.js");
 const temporalDir = "/tmp/tundra";
 const app = express();
 app.use(cors());
@@ -43,7 +50,10 @@ app.post("/media/add", (req, res) => {
         exec(
           `cd ${temporalDir} && unzip -uoP ${password} ${updatePath}`,
           (err, stdout, stderr) => {
-            console.log(stderr, stdout);
+            logs = stdout.split("\n");
+            logs.forEach((log) => {
+              if (log.length > 0) createLog(log);
+            });
             if (err) {
               console.error(err);
             } else {
@@ -57,6 +67,7 @@ app.post("/media/add", (req, res) => {
                   .some((x) => x == false)
               ) {
                 console.log("... files missing");
+                createLog("Error in the file, files missing");
                 message = "error in the file";
               } else {
                 console.log("... files ok", updatePath);
@@ -67,18 +78,29 @@ app.post("/media/add", (req, res) => {
         );
       }
     });
-    // console.log("...removeTemp folder");
-    // execSync(`rm -rf ${temporalDir}`);
   });
 
   res.send({ message });
 });
 
 app.get("/logs", (req, res) => {
-  res.send({ response: readFile(__dirname + "/logs.txt") });
+  let logs = readFile(__dirname + "/logs.txt");
+  logs = logs.split("\n").reverse();
+  res.send({ response: logs.join("\n") });
+});
+
+app.get("/logs/clear", (req, res) => {
+  removeLogs();
+  res.send({ response: "ok" });
+});
+
+app.get("/reboot", (req, res) => {
+  reboot();
+  res.send({ response: "ok" });
 });
 
 const port = 8000;
 server.listen(port, () => {
   console.log("... update service listening on", port);
+  createLog("System start");
 });
