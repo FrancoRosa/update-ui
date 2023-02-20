@@ -1,22 +1,26 @@
 let file = document.getElementById("file");
 let container = document.getElementById("container");
-let button = document.getElementById("upload-button");
+let uploadButton = document.getElementById("upload-button");
+let rebootButton = document.getElementById("reboot-button");
+let logsButton = document.getElementById("logs-button");
+let logs = document.getElementById("logs");
 let text = document.getElementById("filename");
 let loader = document.getElementById("loader");
+let showLogs = false;
 
 file.addEventListener("change", () => {
   if (file.files[0]) {
-    button.disabled = false;
+    uploadButton.disabled = false;
     text.textContent = file.files[0].name;
   } else {
-    button.disabled = true;
+    uploadButton.disabled = true;
     text.textContent = "No file selected.";
   }
 });
-button.addEventListener("click", () => {
+uploadButton.addEventListener("click", () => {
   loader.style.display = "block";
   container.style.display = "none";
-  button.style.display = "none";
+  uploadButton.style.display = "none";
 
   let formData = new FormData();
   formData.append("file", file.files[0], file.files[0].name);
@@ -33,16 +37,46 @@ button.addEventListener("click", () => {
       } else {
         text.textContent = "Error in update process, try again.";
         container.style.display = "block";
-        button.style.display = "block";
+        uploadButton.style.display = "block";
         loader.style.display = "none";
-        button.disabled = true;
+        uploadButton.disabled = true;
       }
     })
     .catch(() => {
       text.textContent = "Error in update process, try again.";
       loader.style.display = "none";
       container.style.display = "block";
-      button.style.display = "block";
-      button.disabled = true;
+      uploadButton.style.display = "block";
+      uploadButton.disabled = true;
     });
+});
+
+logsButton.addEventListener("click", () => {
+  if (showLogs) {
+    logsButton.innerText = "Hide logs";
+    logs.style.display = "block";
+  } else {
+    logsButton.innerText = "Show logs";
+    logs.style.display = "none";
+  }
+  showLogs = !showLogs;
+  // loader.style.display = "block";
+  // container.style.display = "none";
+  // uploadButton.style.display = "none";
+
+  // let formData = new FormData();
+  // formData.append("file", file.files[0], file.files[0].name);
+  fetch("/logs")
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      console.log(json);
+      logs.innerText = json.response;
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  console.log("logs");
 });

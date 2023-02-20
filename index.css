@@ -42,11 +42,25 @@ button:disabled {
   cursor: default;
 }
 
+hr {
+  width: 20em;
+  border: 1px solid darkgreen;
+}
+
+pre {
+  display: none;
+  padding: 1em;
+  height: 20em;
+  overflow: scroll;
+}
+
+.mt {
+  margin-top: 1em;
+}
+
 .loader {
   border: 3px solid darkgreen;
-  /* Light grey */
   border-top: 3px solid lime;
-  /* Blue */
   border-radius: 50%;
   width: 3em;
   height: 3em;
@@ -63,4 +77,24 @@ button:disabled {
   100% {
     transform: rotate(360deg);
   }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: darkgreen;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkolivegreen;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: lime;
 }

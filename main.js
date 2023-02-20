@@ -4,7 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const path = require("path");
 const fileUpload = require("express-fileupload");
-const { password, patchFiles } = require("./helpers.js");
+const { password, patchFiles, readFile } = require("./helpers.js");
 const temporalDir = "/tmp/tundra";
 const app = express();
 app.use(cors());
@@ -72,6 +72,10 @@ app.post("/media/add", (req, res) => {
   });
 
   res.send({ message });
+});
+
+app.get("/logs", (req, res) => {
+  res.send({ response: readFile(__dirname + "/logs.txt") });
 });
 
 const port = 8000;

@@ -7,14 +7,14 @@ const createPath = (path) => {
 };
 
 const readFile = (path) => {
-  let password;
+  let text;
   try {
     const data = fs.readFileSync(path, "utf8");
-    password = data.toString();
+    text = data.toString();
   } catch (e) {
     console.log("Error:", e.stack);
   }
-  return password;
+  return text;
 };
 
 const patchFiles = (dir) => {
@@ -34,3 +34,4 @@ const password = readFile("password.txt");
 exports.password = password;
 exports.createPath = createPath;
 exports.patchFiles = patchFiles;
+exports.readFile = readFile;
