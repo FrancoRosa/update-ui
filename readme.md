@@ -8,17 +8,29 @@ To run this application `nodejs` must be installed, then the main script `index.
 
 ## How to use it
 
-Create a folder containing files and a `info.json` file. The json file should contain the update version name, additional commands (Ex: create a new folder),the files needed and the appropriate directions where to save them. Example:
+Create a folder containing files and a `info.json` file. The json file should contain the update version name, Example:
 
 ```json
 {
   "update": "2023-02-18 - Mark",
-  "commands": [],
-  "files": [
-    { "name": "readme.md", "dir": "/home/pi" },
-    { "name": "readme1.md", "dir": "/home/pi" }
+  "instructions": [
+    {
+      "type": "file",
+      "name": "readme.md",
+      "dir": "/home/fx"
+    },
+    {
+      "type": "command",
+      "name": "sleep 2"
+    }
+    {
+      "type": "command",
+      "name": "ls"
+    }
   ]
 }
 ```
+
+Please note that instructions has two types, file and command, the script will execute the operations one by one
 
 Then the folder should be password protected to avoid someone else creating any file, the password is saved in `password.txt` on this repo.
