@@ -60,7 +60,7 @@ const patchFiles = (dir) => {
   });
 };
 
-const password = readFile("password.txt");
+const password = readFile(`${__dirname}/password.txt`);
 
 exports.password = password;
 exports.createPath = createPath;
