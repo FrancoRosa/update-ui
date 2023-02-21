@@ -1,6 +1,6 @@
 # Update ui
 
-> UI to upload files to a temporaly file, then move the files into its desired location based on a instructions file
+> UI to upload files and run commands from a password protected zip file to provide patchs or updates
 
 - [Update ui](#update-ui)
   - [Deploy instructions](#deploy-instructions)
