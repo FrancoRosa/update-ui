@@ -2,6 +2,16 @@
 
 > UI to upload files to a temporaly file, then move the files into its desired location based on a instructions file
 
+- [Update ui](#update-ui)
+  - [Deploy instructions](#deploy-instructions)
+  - [How to use it](#how-to-use-it)
+  - [Raspberry setup as hotspot](#raspberry-setup-as-hotspot)
+    - [Step 1](#step-1)
+    - [Step 2 - Hostapd Configuration](#step-2---hostapd-configuration)
+    - [Step 3 - Dnsmasq Configuration](#step-3---dnsmasq-configuration)
+    - [Step 4 - DHCP Configuration](#step-4---dhcp-configuration)
+    - [Clean up step - Disabling the hotspot](#clean-up-step---disabling-the-hotspot)
+
 ## Deploy instructions
 
 To run this application `nodejs` must be installed, then the main script `index.js` can be run. It will create a server running on port 8000
