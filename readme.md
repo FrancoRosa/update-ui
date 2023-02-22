@@ -43,7 +43,7 @@ Create a folder containing files and a `info.json` file. The json file should co
 
 Please note that instructions has two types, file and command, the script will execute the operations one by one
 
-Then the folder should be password protected to avoid someone else creating any file, the password is saved in `password.txt` on this repo.
+Then the folder should be password protected to avoid someone else creating any file, the password is saved in `password` on this repo.
 
 ## Raspberry setup as hotspot
 
