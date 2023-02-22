@@ -71,7 +71,11 @@ app.post("/media/add", (req, res) => {
                 message = "error in the file";
               } else {
                 console.log("... files ok", updatePath);
-                patchFiles(updatePath);
+                try {
+                  patchFiles(updatePath);
+                } catch (error) {
+                  console.log(error);
+                }
               }
             }
           }

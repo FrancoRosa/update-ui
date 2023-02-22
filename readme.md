@@ -27,7 +27,7 @@ Create a folder containing any kind of files (txt, png ..) and include a `info.j
     {
       "type": "file",
       "name": "readme.md",
-      "dir": "/home/fx"
+      "dir": "/home/pi"
     },
     {
       "type": "command",

@@ -4,7 +4,11 @@
         {
             "type": "file",
             "name": "readme.md",
-            "dir": "/home/fx"
+            "dir": "/home/pi"
+        },
+        {
+            "type": "command",
+            "name": "sleep 2"
         },
         {
             "type": "command",
